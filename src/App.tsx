@@ -7,6 +7,9 @@ interface Image {
 
 function App() {
   const [imageURL, setImageURL] = useState<string>();
+  const [imageArray, setImageArray] = useState<string[]>([])
+  console.log("Current imageURL: ",imageURL)
+  console.log("Current imageArray: ",imageArray)
 
 //   const handleGetJoke = async () => {
 //     const response = await fetch(
@@ -19,10 +22,12 @@ function App() {
   const handleGetImage = () => {
     fetch("https://dog.ceo/api/breeds/image/random")
       .then((response) => response.json())
-      .then((jsonBody: Image) =>  setImageURL(jsonBody.message));
+      .then((jsonBody: Image) => {
+        setImageURL(jsonBody.message)
+        setImageArray([...imageArray,jsonBody.message])
+      });
   };
 
-  console.log("Current state: ",imageURL)
 
 
   if (imageURL) {
@@ -35,6 +40,16 @@ function App() {
         </details>
         <hr />
         <button onClick={handleGetImage}>Get another image</button>
+        <hr />
+        <div className="imageGrid">
+          {imageArray.map((image) => {
+            return (
+              <>
+                <img src={image} alt=""/>
+              </>
+            );
+          })}
+        </div>
       </div>
     );
   } else {
