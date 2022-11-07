@@ -1,39 +1,40 @@
 import { useState } from "react";
 
-interface Joke {
-  id: number;
-  type: string;
-  setup: string;
-  punchline: string;
+interface Image {
+  message: string,
+  status: string
 }
 
 function App() {
-  const [joke, setJoke] = useState<Joke>();
+  const [imageURL, setImageURL] = useState<string>("poo");
 
-  const handleGetJoke = async () => {
-    const response = await fetch(
-      "https://jokestemp.neillbogie.repl.co/jokes/general/random"
-    );
-    const jsonBody: Joke[] = await response.json();
-    setJoke(jsonBody[0]);
+//   const handleGetJoke = async () => {
+//     const response = await fetch(
+//       "https://jokestemp.neillbogie.repl.co/jokes/general/random"
+//     );
+//     const jsonBody: Joke[] = await response.json();
+//     setJoke(jsonBody[0]);
+//   };
+
+  const handleGetImage = () => {
+    fetch("https://dog.ceo/api/breeds/image/random")
+      .then((response) => response.json())
+      .then((jsonBody: Image) =>  setImageURL(jsonBody.message));
   };
 
-  // const handleGetJoke = () => {
-  //   fetch("https://jokestemp.neillbogie.repl.co/jokes/general/random")
-  //     .then((response) => response.json())
-  //     .then((jsonBody: Joke[]) => setJoke(jsonBody[0]));
-  // };
+  console.log("Current state: ",imageURL)
 
-  if (joke) {
+
+  if (imageURL) {
     return (
       <div>
         <h1>Joke app</h1>
         <details>
-          <summary>{joke.setup}</summary>
-          <p>{joke.punchline}</p>
+          <summary>Here's your image:</summary>
+          <img src={imageURL} alt=""/>
         </details>
         <hr />
-        <button onClick={handleGetJoke}>Get another joke</button>
+        <button onClick={handleGetImage}>Get another image</button>
       </div>
     );
   } else {
@@ -44,7 +45,7 @@ function App() {
           Click the button to trigger a <code>fetch</code> that gets a random
           joke from an API!
         </p>
-        <button onClick={handleGetJoke}>Get joke</button>
+        <button onClick={handleGetImage}>Get image</button>
       </div>
     );
   }
