@@ -12,10 +12,15 @@ code {
     monospace;
 }
 
-img{
-  max-width: 600px;
-}
+
 .imageGrid {
   display: grid;
-  grid-template-columns: auto auto auto;
+  justify-content: center;
+  grid-template-columns: auto auto;
+  row-gap: 20px;
+  column-gap: 20px;
+}
+
+img {
+  border: 3px solid lightblue;
 }
