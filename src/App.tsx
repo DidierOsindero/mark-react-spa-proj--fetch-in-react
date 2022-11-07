@@ -24,7 +24,7 @@ function App() {
       .then((response) => response.json())
       .then((jsonBody: Image) => {
         setImageURL(jsonBody.message)
-        setImageArray([...imageArray,jsonBody.message])
+        setImageArray([String(imageURL),...imageArray])
       });
   };
 
