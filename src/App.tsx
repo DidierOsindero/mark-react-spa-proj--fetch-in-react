@@ -6,7 +6,7 @@ interface Image {
 }
 
 function App() {
-  const [imageURL, setImageURL] = useState<string>("poo");
+  const [imageURL, setImageURL] = useState<string>();
 
 //   const handleGetJoke = async () => {
 //     const response = await fetch(
@@ -28,7 +28,7 @@ function App() {
   if (imageURL) {
     return (
       <div>
-        <h1>Joke app</h1>
+        <h1>Dog Image app</h1>
         <details>
           <summary>Here's your image:</summary>
           <img src={imageURL} alt=""/>
@@ -40,10 +40,10 @@ function App() {
   } else {
     return (
       <div>
-        <h1>Joke app</h1>
+        <h1>Dog Image app</h1>
         <p>
           Click the button to trigger a <code>fetch</code> that gets a random
-          joke from an API!
+          image of a dog from an API!
         </p>
         <button onClick={handleGetImage}>Get image</button>
       </div>
